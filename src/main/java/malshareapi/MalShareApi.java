@@ -30,8 +30,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import org.apache.http.entity.ContentType;
-import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.hc.client5.http.entity.mime.MultipartEntityBuilder;
+import org.apache.hc.core5.http.ContentType;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -353,8 +353,8 @@ public class MalShareApi {
      */
     public MalShareApiLimit getApiKeyLimit() throws IOException {
         JSONObject jsonObject = new JSONObject(new String(connector.get("getlimit")));
-        int limit = jsonObject.optInt("LIMIT");
-        int remaining = jsonObject.optInt("REMAINING");
+        int limit = jsonObject.optInt("LIMIT", -1);
+        int remaining = jsonObject.optInt("REMAINING", -1);
         return new MalShareApiLimit(limit, remaining);
     }
 
